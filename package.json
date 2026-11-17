@@ -1,0 +1,26 @@
+{
+  "name": "intelligent-api-security-platform",
+  "version": "1.0.0",
+  "description": "Intelligent API Security and Request Validation Platform with Regex & DFA Engine",
+  "scripts": {
+    "install:all": "npm --prefix server install && npm --prefix client install",
+    "server": "npm --prefix server start",
+    "client": "npm --prefix client dev",
+    "build": "npm --prefix client run build",
+    "start": "npm --prefix server start",
+    "seed": "node server/utils/seedData.js"
+  },
+  "keywords": [
+    "api-security",
+    "dfa",
+    "finite-automata",
+    "regular-expressions",
+    "regex-validator",
+    "threat-monitoring",
+    "react",
+    "express",
+    "mongodb"
+  ],
+  "author": "SecOps Team",
+  "license": "ISC"
+}
