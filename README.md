@@ -94,7 +94,29 @@ node test-suite.js
 
 ---
 
-## 6. How to Run the Application
+## 6. Network Architecture & Communication Specification (CN)
+
+A complete architectural specification covering computer networking principles is detailed in [NETWORK_ARCHITECTURE_SPECIFICATION.md](file:///C:/Users/nidha/API-Security-Platform/API-Security-Platform/NETWORK_ARCHITECTURE_SPECIFICATION.md):
+
+* **Topology:** Three-Tier Client-Server Architecture over a Star/Extended-Star Network Topology connecting Web Browser clients, Express API Gateway/Server, and MongoDB Database service.
+* **IP Addressing:** 
+  - Client: Loopback `127.0.0.1` / dynamic LAN `192.168.1.x` (unicast socket origin).
+  - Server: Dedicated bind at `127.0.0.1:5000` / `0.0.0.0` (REST socket listener).
+  - Database: MongoDB local daemon at `127.0.0.1:27017` or MongoDB Atlas cloud host.
+* **Protocols:** 
+  - Application Layer: `HTTP/1.1` & `HTTPS` (RESTful JSON APIs with stateful DFA session tracking).
+  - Transport Layer: `TCP` (Reliable, sequenced delivery via 3-way handshake `SYN` ➔ `SYN-ACK` ➔ `ACK`).
+  - Network & Link: `IPv4` datagram encapsulation and Ethernet (`IEEE 802.3`).
+* **Port Numbers:**
+  - `Port 5000`: Dedicated Node.js / Express backend server socket.
+  - `Port 27017`: Default IANA MongoDB database daemon socket.
+  - `Port 5173`: Vite HMR development server (development only).
+  - `Dynamic Ephemeral (49152-65535)`: Client-side OS socket binding.
+* **Packet Flow:** Complete 9-step transmission flow from client DNS resolution, TCP handshake, middleware interception (`requestMonitor.js`), Tier 1 Regex check, Tier 2 DFA sequence evaluation $\delta(q, \sigma)$, MongoDB persistence, and egress HTTP response (200 OK / 403 Forbidden).
+
+---
+
+## 7. How to Run the Application
 
 ### Prerequisites
 - Node.js (v18+)
